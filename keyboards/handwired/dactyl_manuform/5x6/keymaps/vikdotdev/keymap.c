@@ -1,11 +1,10 @@
 #include QMK_KEYBOARD_H
 
 // Layer enum
-#define _BASE  0
-#define _RAISE 1
-#define _LOWER 1
-#define _FN    2
-#define _GAME  3
+#define _BASE     0
+#define _RAISE    1
+#define _LOWER    2
+#define _GAME     3
 
 // Custom keys
 // Left <Ctrl> when held, <Esc> when tapped.
@@ -21,16 +20,15 @@
 // Left <Super> when held, <Back-Slash> when tapped.
 #define WIN_SLS RWIN_T(KC_BSLS)
 
-// Side layer when held, <Enter> when tapped.
-#define TR_ENT LT(_RAISE, KC_ENT)
+// Raise layer when held, <Enter> when tapped.
+#define RA_ENT LT(_RAISE, KC_ENT)
 
-// Side layer when held, <Space> when tapped.
-#define TR_SPC LT(_RAISE, KC_SPC)
+// Raise layer when held, <Space> when tapped.
+#define RA_SPC LT(_RAISE, KC_SPC)
 
-// When tapped or held - switch layer to F-number key layer.
-#define OSL_FN OSL(_FN)
+#define LO_SPC LT(_LOWER, KC_SPC)
 
-#define TLA_UND LALT(KC_UNDS)
+#define TLA_UND LALT_T(KC_UNDS)
 
 // Hold to enable <Shift>, or tap to enable <Shift> for next key-press.
 #define OSM_LS OSM(MOD_LSFT)
@@ -45,6 +43,10 @@
 
 // Switch to game layer. This is a layer where most key just do what they say, layers disabled.
 #define TG_GAME TG(_GAME)
+#define NO_BTN KC_NO
+
+// To better visualise thumb-cluster layout, turn keyboard side outward so that the
+// grid is straight instead of diagonal. The buttons will match directly, except the missing button.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_5x6(
@@ -53,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LC_ESC  , KC_A    , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , KC_SCLN , RC_QUOT ,
         OSM_LS  , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,      KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , OSM_LS  ,
                             KC_LBRC , KC_RBRC ,                                              KC_EQL  , KC_MINS ,
-                                                KC_1    , KC_2    ,      KC_3    , KC_4    ,
-                                                OSM_LA  , TR_SPC  ,      TR_ENT  , KC_5    ,
-                                                KC_NO   , TLA_UND ,      KC_6    , KC_7
+                                                OSM_LA  , NO_BTN  ,      NO_BTN  , KC_NO    ,
+                                                LO_SPC  , RA_SPC  ,      RA_ENT  , LO_SPC   ,
+                                                QK_BOOT , TLA_UND ,      OSM_RA  , QK_BOOT
     ),
 
     [_RAISE] = LAYOUT_5x6(
@@ -64,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______ , _______ , KC_BSPC , KC_DEL  , KC_RGHT , KC_ENT  ,      _______ , _______ , _______ , _______ , _______ , _______ ,
         _______ , _______ , _______ , _______ , _______ , KC_LEFT ,      KC_DOWN , _______ , _______ , _______ , _______ , _______ ,
                             _______ , _______ ,                                              _______ , _______ ,
-                                                _______ , _______ ,      _______ , _______ ,
+                                                _______ , NO_BTN  ,      NO_BTN  , _______ ,
                                                 _______ , _______ ,      _______ , _______ ,
                                                 _______ , _______ ,      KC_CAPS , _______
     ),
@@ -75,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE , KC_VOLD , KC_VOLU , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , _______ , _______ ,
         KC_MPLY , KC_MPRV , KC_MNXT , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , _______ , _______ ,
                             _______ , _______ ,                                              _______ , _______ ,
-                                                _______ , _______ ,      _______ , _______ ,
+                                                _______ , NO_BTN  ,      NO_BTN  , _______ ,
                                                 _______ , _______ ,      _______ , _______ ,
                                                 _______ , _______ ,      _______ , _______
     ),
@@ -86,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______ , _______ , _______ , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , _______ , _______ ,
         _______ , _______ , _______ , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , _______ , _______ ,
                             _______ , _______ ,                                              _______ , _______ ,
-                                                _______ , _______ ,      _______ , _______ ,
+                                                _______ , NO_BTN  ,      NO_BTN  , _______ ,
                                                 _______ , _______ ,      _______ , _______ ,
                                                 _______ , _______ ,      _______ , _______
     ),
