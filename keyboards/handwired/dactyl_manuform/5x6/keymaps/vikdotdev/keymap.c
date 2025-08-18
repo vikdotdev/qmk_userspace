@@ -10,8 +10,8 @@
 // Left <Ctrl> when held, <Esc> when tapped.
 #define LC_ESC LCTL_T(KC_ESC)
 
-// Right <Ctrl> when held, <Quote> when tapped.
-#define RC_QUOT RCTL_T(KC_QUOT)
+// Right <Ctrl> when held, ; when tapped.
+#define RC_SCL RCTL_T(KC_SCLN)
 
 // Left <Super> when held, <Tab> when tapped.
 #define WIN_TAB LWIN_T(KC_TAB)
@@ -37,9 +37,9 @@
 #define TG_GAME TG(_GAME)
 #define NO_BTN KC_NO
 
-// Left <Alt> on hold, pinky keys on press.
+// Left <Alt> on hold, A and ' on tap.
 #define TLA_A LALT_T(KC_A)
-#define TLA_SCL LALT_T(KC_SCLN)
+#define TLA_QUOT LALT_T(KC_QUOT)
 
 enum custom_keycodes {
     LT_UNDS = SAFE_RANGE, // custom LT(_LOWER, KC_UNDS)
@@ -155,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_5x6(
         KC_1    , KC_2    , KC_3    , KC_4    , KC_5    , KC_6    ,      KC_7    , KC_8    , KC_9    , KC_0    , KC_TILD , KC_GRV  ,
         WIN_TAB , KC_Q    , KC_W    , KC_E    , KC_R    , KC_T    ,      KC_Y    , KC_U    , KC_I    , KC_O    , KC_P    , WIN_SLS ,
-        LC_ESC  , TLA_A   , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , TLA_SCL , RC_QUOT ,
+        LC_ESC  , TLA_A   , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , RC_SCL  , TLA_QUOT,
         OSM_LS  , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,      KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , OSM_LS  ,
                             KC_LBRC , KC_RBRC ,                                              KC_EQL  , KC_MINS ,
                                                 KC_LALT , NO_BTN  ,      NO_BTN  , RALT_DEL ,
@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_GAME] = LAYOUT_5x6(
         KC_1    , KC_2    , KC_3    , KC_4    , KC_5    , KC_6    ,      KC_7    , KC_8    , KC_9    , KC_0    , KC_TILD , KC_GRV  ,
         KC_TAB  , KC_Q    , KC_W    , KC_E    , KC_R    , KC_T    ,      KC_Y    , KC_U    , KC_I    , KC_O    , KC_P    , KC_BSLS ,
-        KC_LSFT , KC_A    , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , KC_SCLN , RC_QUOT ,
+        KC_LSFT , KC_A    , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , KC_SCLN , TLA_QUOT,
         KC_LCTL , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,      KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , KC_RSFT  ,
                             KC_LBRC , KC_RBRC ,                                              KC_EQL  , KC_MINS ,
                                                 KC_LALT , NO_BTN  ,      NO_BTN  , KC_DEL  ,
