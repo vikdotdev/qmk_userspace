@@ -2,9 +2,10 @@
 
 // Layer enum
 #define _BASE     0
-#define _GAME     1
-#define _RAISE    2
-#define _LOWER    3
+#define _MAC      1
+#define _GAME     2
+#define _RAISE    3
+#define _LOWER    4
 
 // Custom keys
 // Left <Ctrl> when held, <Esc> when tapped.
@@ -30,12 +31,16 @@
 #define OSM_LS OSM(MOD_LSFT)
 #define OSM_RS OSM(MOD_RSFT)
 
-// Hold to enable <Alt>, or tap to send <Delete>.
-#define RALT_DEL RALT_T(KC_DEL)
-
 // Switch to game layer. This is a layer where most key just do what they say, layers disabled.
-#define TG_GAME TG(_GAME)
 #define NO_BTN KC_NO
+
+// Hyper (Cmd+Ctrl+Alt) when held, Tab when tapped
+#define HYPR_TAB LCAG_T(KC_TAB)
+
+// Switch default layer
+#define DF_BASE DF(_BASE)
+#define DF_MAC  DF(_MAC)
+#define DF_GAME DF(_GAME)
 
 // Left <Alt> on hold, A and ' on tap.
 #define TLA_A LALT_T(KC_A)
@@ -158,9 +163,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LC_ESC  , TLA_A   , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , RC_SCL  , TLA_QUOT,
         OSM_LS  , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,      KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , OSM_LS  ,
                             KC_LBRC , KC_RBRC ,                                              KC_EQL  , KC_MINS ,
-                                                KC_LALT , NO_BTN  ,      NO_BTN  , RALT_DEL ,
-                                                KC_PGUP , RA_SPC  ,      RA_ENT  , KC_BSPC  ,
-                                                KC_PGDN , LT_UNDS ,      KC_HOME , KC_END
+                                                KC_LALT , NO_BTN  ,      NO_BTN  , KC_RALT ,
+                                                KC_NO   , RA_SPC  ,      RA_ENT  , KC_BSPC  ,
+                                                KC_DEL  , LT_UNDS ,      KC_HOME , KC_END
+    ),
+
+    [_MAC] = LAYOUT_5x6(
+        KC_1    , KC_2    , KC_3    , KC_4    , KC_5    , KC_6    ,      KC_7    , KC_8    , KC_9    , KC_0    , KC_TILD , KC_GRV  ,
+        HYPR_TAB, KC_Q    , KC_W    , KC_E    , KC_R    , KC_T    ,      KC_Y    , KC_U    , KC_I    , KC_O    , KC_P    , WIN_SLS ,
+        LC_ESC  , TLA_A   , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , RC_SCL  , TLA_QUOT,
+        OSM_LS  , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,      KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , OSM_LS  ,
+                            KC_LBRC , KC_RBRC ,                                              KC_EQL  , KC_MINS ,
+                                                KC_LALT , NO_BTN  ,      NO_BTN  , KC_RALT ,
+                                                KC_LGUI , RA_SPC  ,      RA_ENT  , KC_BSPC  ,
+                                                KC_DEL  , LT_UNDS ,      KC_HOME , KC_END
     ),
 
     [_RAISE] = LAYOUT_5x6(
@@ -176,9 +192,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_LOWER] = LAYOUT_5x6(
         KC_F1   , KC_F2   , KC_F3   , KC_F4   , KC_F5   , KC_F6   ,      KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  , KC_F12  ,
-        _______ , _______ , _______ , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , KC_PSCR , TG_GAME ,
-        KC_MUTE , KC_VOLD , KC_VOLU , KC_BSPC , _______ , KC_ESC  ,      _______ , _______ , _______ , KC_CAPS , _______ , _______ ,
-        KC_MPLY , KC_MPRV , KC_MNXT , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , _______ , _______ ,
+        _______ , _______ , _______ , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , KC_PSCR , DF_BASE ,
+        KC_MUTE , KC_VOLD , KC_VOLU , KC_BSPC , _______ , KC_ESC  ,      _______ , _______ , _______ , KC_CAPS , _______ , DF_MAC  ,
+        KC_MPLY , KC_MPRV , KC_MNXT , _______ , _______ , _______ ,      _______ , _______ , _______ , _______ , _______ , DF_GAME ,
                             _______ , _______ ,                                              QK_RBT  , QK_BOOT ,
                                                 _______ , NO_BTN  ,      NO_BTN  , _______ ,
                                                 _______ , _______ ,      _______ , _______ ,
@@ -191,8 +207,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT , KC_A    , KC_S    , KC_D    , KC_F    , KC_G    ,      KC_H    , KC_J    , KC_K    , KC_L    , KC_SCLN , TLA_QUOT,
         KC_LCTL , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,      KC_N    , KC_M    , KC_COMM , KC_DOT  , KC_SLSH , KC_RSFT  ,
                             KC_LBRC , KC_RBRC ,                                              KC_EQL  , KC_MINS ,
-                                                KC_LALT , NO_BTN  ,      NO_BTN  , KC_DEL  ,
-                                                KC_PGUP , KC_SPC  ,      KC_ENT  , KC_BSPC ,
-                                                KC_PGDN , LT_UNDS ,      KC_HOME , KC_END
+                                                KC_LALT , NO_BTN  ,      NO_BTN  , KC_RALT ,
+                                                KC_NO   , KC_SPC  ,      KC_ENT  , KC_BSPC ,
+                                                KC_DEL  , LT_UNDS ,      KC_HOME , KC_END
     ),
 };
